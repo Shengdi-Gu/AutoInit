@@ -21,5 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "AutoInit"
 include(":app")
-include(":annotation")
+include(":AutoInitAnnotation")
+include(":AutoInitProcessor")
 include(":AutoInit")
