@@ -9,5 +9,6 @@ java {
 }
 dependencies {
     implementation(project(":AutoInitAnnotation"))
+    implementation(libs.kotlin.stdlib)
 }
 
