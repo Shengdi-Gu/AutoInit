@@ -2,10 +2,23 @@ package com.gusd.autoinit
 
 import android.app.Activity
 import android.content.Context
+import com.gusd.annotation.AutoInit
 
 interface IAutoInitializer {
 
-    fun onInit(context: Context) {
+    fun onInit(context: Context, data: Map<String, Any> = emptyMap())
+
+    fun getName(): String {
+        val name = this.javaClass.getAnnotation(AutoInit::class.java)?.name
+        return if (name.isNullOrEmpty()) {
+            this.javaClass.simpleName
+        } else {
+            name
+        }
+
+    }
+
+    fun unInit() {
 
     }
 
@@ -52,7 +65,6 @@ interface IAutoInitializer {
     fun onProcessForeground() {
 
     }
-
 
     fun onTerminate() {
 

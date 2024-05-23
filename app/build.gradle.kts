@@ -1,11 +1,7 @@
-import org.jetbrains.kotlin.base.kapt3.KaptOptions
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    // kapt
-    id("kotlin-kapt")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -47,8 +43,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    "kapt"(project(":AutoInitProcessor"))
-
-    implementation(project(":AutoInit"))
-
+    implementation(project(":module1"))
+    implementation(project(":module2"))
+    implementation(project(":module3"))
+    kapt(project(":AutoInitProcessor"))
 }

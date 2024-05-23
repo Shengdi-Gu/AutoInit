@@ -2,4 +2,4 @@ package com.gusd.annotation
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class AutoInit(val processName:String = "")
+annotation class AutoInit(val processNames: Array<String> = [], val name: String = "")
