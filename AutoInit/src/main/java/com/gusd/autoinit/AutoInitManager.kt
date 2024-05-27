@@ -1,6 +1,7 @@
 package com.gusd.autoinit
 
 import android.content.Context
+import com.gusd.annotation.AutoInit
 import java.util.ServiceLoader
 
 object AutoInitManager {
@@ -13,16 +14,16 @@ object AutoInitManager {
     }
 
     fun init(context: Context, data: Map<String, Any>) {
-        initLists.forEach {
-            it.onInit(context.applicationContext)
+        val processName = getProcessName(context)
+        val shouldInitList = initLists.filter { it.shouldInit(context, processName) }
+        // init by priority
+        shouldInitList.sortedBy { it.getPriority() }.forEach {
+            it.onInit(context, data)
         }
     }
 
 
     fun unInit() {
-        initLists.forEach {
-            it.unInit()
-        }
     }
 
 

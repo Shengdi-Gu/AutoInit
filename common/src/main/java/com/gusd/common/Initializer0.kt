@@ -14,4 +14,8 @@ class Initializer0 : IAutoInitializer {
     override fun getName(): String {
         return "commonInit"
     }
+
+    override fun getPriority(): Int {
+        return Int.MIN_VALUE
+    }
 }

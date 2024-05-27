@@ -15,8 +15,9 @@ interface IAutoInitializer {
         } else {
             name
         }
-
     }
+
+    fun getPriority(): Int
 
     fun unInit() {
 
@@ -68,5 +69,14 @@ interface IAutoInitializer {
 
     fun onTerminate() {
 
+    }
+
+    fun shouldInit(context: Context, processName: String): Boolean {
+        this::class.java.getAnnotation(AutoInit::class.java)?.let {
+            return it.processNames.contains(processName)
+                    || it.processNames.contains("*")
+                    || (it.processNames.isEmpty() && processName == context.packageName)
+        }
+        return false
     }
 }
