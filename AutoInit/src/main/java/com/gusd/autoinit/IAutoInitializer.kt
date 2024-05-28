@@ -2,11 +2,13 @@ package com.gusd.autoinit
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import com.gusd.annotation.AutoInit
 
 interface IAutoInitializer {
 
-    fun onInit(context: Context, data: Map<String, Any> = emptyMap())
+    fun onInit(context: Context, intent: Intent? = null)
 
     fun getName(): String {
         val name = this.javaClass.getAnnotation(AutoInit::class.java)?.name
@@ -17,6 +19,11 @@ interface IAutoInitializer {
         }
     }
 
+    /**
+     * 数值越小，优先级越高
+     * 当数值小于 0 时，当前 IAutoInitializer 只能在主线程执行，不支持异步初始化，通常用于基础库的初始化
+     * 当数值大于 0 时，当前 IAutoInitializer 支持同步和异步初始化
+     */
     fun getPriority(): Int
 
     fun unInit() {
@@ -47,15 +54,7 @@ interface IAutoInitializer {
 
     }
 
-    fun onActivityRestart(activity: Activity) {
-
-    }
-
     fun onActivitySaveInstanceState(activity: Activity) {
-
-    }
-
-    fun onActivityRestoreInstanceState(activity: Activity) {
 
     }
 
@@ -78,5 +77,13 @@ interface IAutoInitializer {
                     || (it.processNames.isEmpty() && processName == context.packageName)
         }
         return false
+    }
+
+    fun onConfigurationChanged(newConfig: Configuration) {
+
+    }
+
+    fun onLowMemory() {
+
     }
 }

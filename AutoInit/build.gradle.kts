@@ -33,5 +33,6 @@ android {
 }
 dependencies {
     api(project(":AutoInitAnnotation"))
+    implementation(libs.androidx.lifecycle.process)
 }
 
