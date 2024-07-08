@@ -145,9 +145,9 @@ class AutoInitProcessor : AbstractProcessor() {
 
 
     private fun log(msg: String) {
-        if (processingEnv.options.containsKey("debug")) {
+//        if (processingEnv.options.containsKey("debug")) {
             processingEnv.messager.printMessage(Diagnostic.Kind.NOTE, msg)
-        }
+//        }
     }
 
     private fun warning(msg: String, element: Element, annotation: AnnotationMirror) {

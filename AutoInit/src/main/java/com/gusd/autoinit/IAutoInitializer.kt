@@ -70,8 +70,8 @@ interface IAutoInitializer {
 
     }
 
-    fun shouldInit(context: Context, processName: String): Boolean {
-        this::class.java.getAnnotation(AutoInit::class.java)?.let {
+    fun shouldInit(context: Context, clazz: Class<*>, processName: String): Boolean {
+        clazz.getAnnotation(AutoInit::class.java)?.let {
             return it.processNames.contains(processName)
                     || it.processNames.contains("*")
                     || (it.processNames.isEmpty() && processName == context.packageName)

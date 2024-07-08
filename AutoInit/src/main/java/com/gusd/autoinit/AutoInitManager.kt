@@ -31,7 +31,8 @@ object AutoInitManager : Application.ActivityLifecycleCallbacks, LifecycleEventO
     fun init(context: Context, intent: Intent? = null) {
         application = context.applicationContext as Application
         val processName = getProcessName(context)
-        val shouldInitList = initLists.filter { it.shouldInit(context, processName) }
+        val shouldInitList =
+            initLists.filter { it.shouldInit(context, it::class.java, processName) }
         application.registerActivityLifecycleCallbacks(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         application.registerComponentCallbacks(this)
